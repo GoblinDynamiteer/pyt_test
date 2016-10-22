@@ -2,7 +2,7 @@
 #http://docs.python-guide.org/en/latest/scenarios/json/
 import json #json lib
 
-with open('json_test.txt', 'r') as jsonfile: #opens textfile as variable jsonfile
+with open('json_text.txt', 'r') as jsonfile: #opens textfile as variable jsonfile
 	parsed_json = json.loads(jsonfile.read()) #reads and parses json string to variable parsed_json
 	jsonfile.closed #returns 1/0 if jsonfile file is closed by script
 True #Not sure what this does here, checks that jsonfile.closed is true? What happens if not true?
