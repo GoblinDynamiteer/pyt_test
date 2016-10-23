@@ -1,16 +1,17 @@
 # -*- coding: latin-1 -*-
 
-#Searches OMDb for json-respones, where title is passed argument 1, and returns value at argument 2
+#Gets data for TV-show/Movie from JSON respone
+#Either from TV-Maze or OMDb, depending on passed argument 2
+#Argument 3 is the value to read eg Title, name, Genre, genres, etc
 
 import json, urllib.request, sys #libraries for json and url
 #sys.argv[0] contains script-name -- similar to C
-#sys.argv[1] contains passed argument 1 -- similar to C
-#sys.argv[2] contains passed argument 2
-#sys.argv[3] contains passed argument 3  1 = OMDb 2= TVmaze
+#sys.argv[1] contains passed argument 1 -- IMDb-id
+#sys.argv[2] contains passed argument 2 -- 1 = OMDb 2= TVmaze
+#sys.argv[3] contains passed argument 3 -- Key to read: eg Title, name, Genre, genres, etc
 
 imdb = sys.argv[1]
 
-#http://www.omdbapi.com/?t=hannibal&y=&plot=short&r=json
 if int(sys.argv[2]) == 1: #Arguments are passed as strings? Use int() to convert to integer
 	url = "http://www.omdbapi.com/?i=" + imdb + "&y=&plot=short&r=json" #adds strings to variable url
 
@@ -26,10 +27,8 @@ parsed_json = json.loads(response) #reads and parses json string to variable par
 if sys.argv[3] == "lastAired":
 	print(parsed_json["_links"]["previousepisode"]["href"])
 
-else:
-	print(parsed_json[sys.argv[3]]) #Prints the parsed json, at value of passed argument 2 (can be title, year, etc for this case)
+else: #Prints the parsed json, at value of passed argument 2 (can be title, year, etc for this case)
+	print(parsed_json[sys.argv[3]]) 
 
-#xyplorer test: 
-#echo runret('python json_web_argv.py "the terminator" "Year"', "D:\Google Drive\Utbildning\Mjukvaruutvecklare inbyggda system\Kod\Python\Testing\JSON\");
-#Will get 'year' of movie 'the terminator'
+#command line test: 
 #python json_tvmaze_omdb.py tt0475784 2 lastAired
